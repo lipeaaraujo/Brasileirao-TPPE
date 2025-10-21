@@ -12,10 +12,37 @@ public class Campeonato {
     }
 
     private ArrayList<Rodada> criarRodadas() {
-        // Lógica para criar as rodadas do campeonato
-        return new ArrayList<Rodada>();
+        ArrayList<Rodada> rodadas = new ArrayList<>();
+        ArrayList<Time> listaTimes = new ArrayList<>(times);
+        int n = listaTimes.size();
+
+        int totalRodadas = (n - 1) * 2;
+
+        for (int rodada = 0; rodada < totalRodadas; rodada++) {
+            ArrayList<Partida> partidasRodada = new ArrayList<>();
+
+            for (int i = 0; i < n / 2; i++) {
+                Time time1 = listaTimes.get(i);
+                Time time2 = listaTimes.get(n - 1 - i);
+
+                if (rodada < n - 1) {
+                    partidasRodada.add(new Partida(time1, time2)); // ida
+                } else {
+                    partidasRodada.add(new Partida(time2, time1)); // volta
+                }
+            }
+
+            rodadas.add(new Rodada(partidasRodada));
+
+            Time ultimo = listaTimes.remove(listaTimes.size() - 1);
+            listaTimes.add(1, ultimo);
+        }
+
+        return rodadas;
     }
-    
+
+
+
     public void classificacao() {
         // Lógica para exibir a classificação do campeonato
     }
