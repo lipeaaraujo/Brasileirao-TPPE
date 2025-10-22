@@ -47,8 +47,19 @@ public class Campeonato {
         // Lógica para exibir a classificação do campeonato
     }
 
-    public void jogarProximaRodada() {
-        // Lógica para jogar a próxima rodada do campeonato
+    public void jogarProximaRodada(int [] golsCasa, int [] golsVisitante,
+                                   int [] cartoesAmarelosCasa, int [] cartoesAmarelosVisitante,
+                                   int [] cartoesVermelhosCasa, int [] cartoesVermelhosVisitante) {
+        for (Rodada rodada : rodadas) {
+            boolean rodadaConcluida = rodada.getPartidas().stream().allMatch(Partida::isConcluida);
+            if (!rodadaConcluida) {
+                rodada.jogarRodada(golsCasa, golsVisitante,
+                                   cartoesAmarelosCasa, cartoesAmarelosVisitante,
+                                   cartoesVermelhosCasa, cartoesVermelhosVisitante);
+                break;
+            }
+        }
+
     }
 
     // GETTERS E SETTERS
