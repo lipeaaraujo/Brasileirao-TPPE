@@ -31,7 +31,43 @@ public class Partida {
         int cartoesVermelhosCasa,
         int cartoesVermelhosVisitante
     ) {
-        // Lógica para atualizar o placar e os cartões
+        this.golsCasa = golsCasa;
+        this.golsVisitante = golsVisitante;
+        this.cartoesAmarelosCasa = cartoesAmarelosCasa;
+        this.cartoesAmarelosVisitante = cartoesAmarelosVisitante;
+        this.cartoesVermelhosCasa = cartoesVermelhosCasa;
+        this.cartoesVermelhosVisitante = cartoesVermelhosVisitante;
+        this.concluida = true;
+
+        timeCasa.setPartidasJogadas(timeCasa.getPartidasJogadas() + 1);
+        timeCasa.setGolsPro(timeCasa.getGolsPro() + golsCasa);
+        timeCasa.setGolsContra(timeCasa.getGolsContra() + golsVisitante);
+        timeCasa.setCartoesAmarelos(timeCasa.getCartoesAmarelos() + cartoesAmarelosCasa);
+        timeCasa.setCartoesVermelhos(timeCasa.getCartoesVermelhos() + cartoesVermelhosCasa);
+
+        timeVisitante.setPartidasJogadas(timeVisitante.getPartidasJogadas() + 1);
+        timeVisitante.setGolsPro(timeVisitante.getGolsPro() + golsVisitante);
+        timeVisitante.setGolsContra(timeVisitante.getGolsContra() + golsCasa);
+        timeVisitante.setCartoesAmarelos(timeVisitante.getCartoesAmarelos() + cartoesAmarelosVisitante);
+        timeVisitante.setCartoesVermelhos(timeVisitante.getCartoesVermelhos() + cartoesVermelhosVisitante);
+
+        if (golsCasa > golsVisitante) {
+            timeCasa.setVitorias(timeCasa.getVitorias() + 1);
+            timeCasa.setPontos(timeCasa.getPontos() + 3);
+            timeVisitante.setDerrotas(timeVisitante.getDerrotas() + 1);
+
+        } else if (golsCasa < golsVisitante) {
+            timeVisitante.setVitorias(timeVisitante.getVitorias() + 1);
+            timeVisitante.setPontos(timeVisitante.getPontos() + 3);
+            timeCasa.setDerrotas(timeCasa.getDerrotas() + 1);
+            
+        } else {
+            timeCasa.setEmpates(timeCasa.getEmpates() + 1);
+            timeVisitante.setEmpates(timeVisitante.getEmpates() + 1);
+            timeCasa.setPontos(timeCasa.getPontos() + 1);
+            timeVisitante.setPontos(timeVisitante.getPontos() + 1);
+        }
+
     } 
 
     // GETTERS E SETTERS
