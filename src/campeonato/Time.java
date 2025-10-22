@@ -66,6 +66,9 @@ public class Time {
         return cartoesVermelhos;
     }
 
+    public int getSaldo(){
+        return this.getGolsPro() - this.getGolsContra();
+    }
     // SETTERS
     public void setNome(String nome) {
         this.nome = nome;

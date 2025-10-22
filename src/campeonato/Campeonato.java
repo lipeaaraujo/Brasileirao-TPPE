@@ -1,6 +1,9 @@
 package campeonato;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
 
 public class Campeonato {
     private ArrayList<Time> times;
@@ -41,10 +44,98 @@ public class Campeonato {
         return rodadas;
     }
 
+    private int confrontosDiretos(Time time1, Time time2){
+        int vitorias_time1 = 0;
+        int vitorias_time2 = 0;
+        for(Rodada rodada : rodadas){
+            for(Partida partida : rodada.getPartidas()){
+                if(partida.isConcluida()){
+                    Time casa = partida.getTimeCasa();
+                    Time visitante = partida.getTimeVisitante();
 
+                    if((casa.equals(time1) && visitante.equals(time2)) || 
+                        (casa.equals(time2) && visitante.equals(time1)))
+                    {
+                        if(casa.equals(time1)){
+                            if(partida.getGolsCasa() > partida.getGolsVisitante())
+                            {
+                                vitorias_time1++;
+                            }
+                            else if(partida.getGolsCasa() < partida.getGolsVisitante())
+                            {
+                                vitorias_time2++;
+                            }
+                        }
+                        else
+                        {
+                            if(partida.getGolsCasa() > partida.getGolsVisitante())
+                            {
+                                vitorias_time2++;
+                            }
+                            else if(partida.getGolsCasa() < partida.getGolsVisitante())
+                            {
+                                vitorias_time1++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
+        if(vitorias_time1 > vitorias_time2){
+            return 1;
+        }
+        if(vitorias_time2 > vitorias_time1){
+            return 2;
+        }
+        return 0;
+    }
+
+    private void ordenarPorCartoes(List<Time> bloco) {
+        Collections.sort(bloco, Comparator
+                .comparingInt(Time::getCartoesVermelhos)
+                .thenComparingInt(Time::getCartoesAmarelos));
+    }
     public void classificacao() {
         // Lógica para exibir a classificação do campeonato
+        this.times.sort(Comparator.comparingInt(Time::getPontos)
+                    .reversed()
+                    .thenComparingInt(Time:: getVitorias)
+                    .reversed()
+                    .thenComparingInt(Time:: getSaldo)
+                    .reversed()
+                    .thenComparingInt(Time::getGolsPro).reversed());
+        
+        int i = 0;
+        int times_size = times.size();
+        while(i < times_size){
+            int j= i ;
+
+            while(j < times_size && 
+                  times.get(i).getPontos() == times.get(j).getPontos() &&
+                  times.get(i).getVitorias() == times.get(j).getVitorias() &&
+                  times.get(i).getSaldo() == times.get(j).getSaldo() &&
+                  times.get(i).getGolsPro() == times.get(j).getGolsPro()){
+                j++;
+            }
+
+            if(j - i > 1){
+                List<Time> bloco = times.subList(i, j);
+                if(bloco.size() == 2){
+                    int r = this.confrontosDiretos(bloco.get(0), bloco.get(1));
+                    if(r == 0){
+                        this.ordenarPorCartoes(bloco);
+                    }
+                    else if(r == 2){
+                        Collections.swap(times, i, i+ 1);
+                    }
+                }
+                else{
+                    ordenarPorCartoes(bloco);
+                }
+            }
+            i = j;
+        }
     }
 
     public void jogarProximaRodada(int [] golsCasa, int [] golsVisitante,
