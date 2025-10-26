@@ -109,4 +109,20 @@ public class Time {
     public void setCartoesVermelhos(int cartoesVermelhos) {
         this.cartoesVermelhos = cartoesVermelhos;
     }
+    
+    @Override
+    public String toString() {
+        return "Time: " + nome + "\n" +
+               "Pontos: " + pontos + "\n" +
+               "Partidas Jogadas: " + partidasJogadas + "\n" +
+               "Vitórias: " + vitorias + "\n" +
+               "Empates: " + empates + "\n" +
+               "Derrotas: " + derrotas + "\n" +
+               "Gols Pró: " + golsPro + "\n" +
+               "Gols Contra: " + golsContra + "\n" +
+               "Saldo de Gols: " + getSaldo() + "\n" +
+               "Cartões Amarelos: " + cartoesAmarelos + "\n" +
+               "Cartões Vermelhos: " + cartoesVermelhos + "\n";
+    }
+
 }

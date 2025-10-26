@@ -134,4 +134,30 @@ public class Partida {
     public void setConcluida(boolean concluida) {
         this.concluida = concluida;
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("%s %d x %d %s\n",
+                timeCasa.getNome(),
+                golsCasa,
+                golsVisitante,
+                timeVisitante.getNome()));
+
+        sb.append("Cartões Amarelos: ")
+          .append(timeCasa.getNome()).append(" ").append(cartoesAmarelosCasa)
+          .append(" x ")
+          .append(cartoesAmarelosVisitante).append(" ").append(timeVisitante.getNome()).append("\n");
+
+        sb.append("Cartões Vermelhos: ")
+          .append(timeCasa.getNome()).append(" ").append(cartoesVermelhosCasa)
+          .append(" x ")
+          .append(cartoesVermelhosVisitante).append(" ").append(timeVisitante.getNome()).append("\n");
+
+        sb.append("Status: ").append(concluida ? "Concluída" : "A disputar").append("\n");
+
+        return sb.toString();
+    }
+
 }
