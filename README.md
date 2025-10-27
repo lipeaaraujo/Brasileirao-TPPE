@@ -1,18 +1,56 @@
-## Getting Started
+# Brasileirão - TPPE
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Sistema de simulação de campeonato de futebol no formato de pontos corridos, desenvolvido em Java.
 
-## Folder Structure
+## Descrição
 
-The workspace contains two folders by default, where:
+Aplicação que simula um campeonato de futebol com sistema de rodadas, partidas e classificação automática. Implementa as regras oficiais de classificação incluindo pontuação, saldo de gols, confronto direto e critérios de desempate por cartões.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Funcionalidades
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- Geração automática de rodadas (turno e returno)
+- Registro de partidas com gols e cartões
+- Classificação automática com critérios de desempate:
+  - Pontos (vitória: 3pts, empate: 1pt)
+  - Número de vitórias
+  - Saldo de gols
+  - Gols pró
+  - Confronto direto
+  - Cartões (menor quantidade de vermelhos e amarelos)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Estrutura
 
-## Dependency Management
+```
+src/
+├── campeonato/
+│   ├── Campeonato.java    # Gerenciamento do campeonato
+│   ├── Time.java          # Dados e estatísticas dos times
+│   ├── Partida.java       # Lógica de partidas
+│   └── Rodada.java        # Agrupamento de partidas
+└── tests/                 # Testes unitários (JUnit)
+```
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Como usar
+
+### Compilar
+```bash
+javac -d bin src/campeonato/*.java src/tests/*.java
+```
+
+### Executar testes
+```bash
+java -cp bin:lib/* org.junit.runner.JUnitCore tests.AllTests
+```
+
+## Testes
+
+O projeto inclui testes para:
+- Sistema de pontuação
+- Critérios de desempate
+- Vitórias, gols e saldos
+- Geração de rodadas
+
+## Disciplina
+
+**Técnicas de Programação em Plataformas Emergentes**  
+Universidade de Brasília (UnB)
