@@ -22,7 +22,7 @@ public class TstPontuacao extends TstBase {
 	            vermelhosVisitanteRodadas[i]
 	        );
 	        
-	        campeonato.classificacao();
+	        campeonato.classifica();
 	        
 	        // Verifica a pontuação de cada time
 	        // Comecei o for do ultimo para o primeiro pois foi salvo assim

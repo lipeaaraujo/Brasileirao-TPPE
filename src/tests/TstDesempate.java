@@ -98,7 +98,7 @@ public class TstDesempate {
 	            vermelhosVisitanteRodadas[i]
 	        );
 	        
-	        campeonato.classificacao();
+	        campeonato.classifica();
     	}
         
         // Botafogo e Flamengo empataram em pontos, mas o Botafogo tem 1 vitoria a mais

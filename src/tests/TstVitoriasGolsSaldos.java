@@ -27,7 +27,7 @@ public class TstVitoriasGolsSaldos extends TstBase {
 	            vermelhosVisitanteRodadas[i]
 	        );
 	        
-	        campeonato.classificacao();
+	        campeonato.classifica();
 	        
 	        // Verifica cada time
             for (int tIdx = 0; tIdx < ordemTimes.length; tIdx++) {
