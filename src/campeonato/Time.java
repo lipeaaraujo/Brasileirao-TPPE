@@ -1,28 +1,20 @@
 package campeonato;
 
 public class Time {
+    private String nome;
     private int pontos;
     private int partidasJogadas;
-    private int vitorias;
-    private int empates;
-    private int derrotas;
-    private int golsPro;
-    private int golsContra;
-    private String nome;
-    private int cartoesAmarelos;
-    private int cartoesVermelhos;
+    private Desempenho desempenho;
+    private Gols golsJogo;
+    private Cartoes cartoes;
 
     public Time(String nome) {
         this.nome = nome;
         this.pontos = 0;
         this.partidasJogadas = 0;
-        this.vitorias = 0;
-        this.empates = 0;
-        this.derrotas = 0;
-        this.golsPro = 0;
-        this.golsContra = 0;
-        this.cartoesAmarelos = 0;
-        this.cartoesVermelhos = 0;
+        this.cartoes = new Cartoes();
+        this.desempenho = new Desempenho();
+        this.golsJogo = new Gols();
     }
 
     // GETTERS
@@ -39,36 +31,36 @@ public class Time {
     }
 
     public int getVitorias() {
-        return vitorias;
+        return desempenho.getVitorias();
     }
 
     public int getEmpates() {
-        return empates;
+        return desempenho.getEmpates();
     }
 
     public int getDerrotas() {
-        return derrotas;
+        return desempenho.getDerrotas();
     }
 
     public int getGolsPro() {
-        return golsPro;
+        return golsJogo.getGolsPro();
+    }
+    public int getGolsContra() {
+        return golsJogo.getGolsContra();
     }
 
-    public int getGolsContra() {
-        return golsContra;
+    public int getSaldo() {
+        return golsJogo.getSaldo();
     }
 
     public int getCartoesAmarelos() {
-        return cartoesAmarelos;
+        return cartoes.getCartoesAmarelos();
     }
-
+    
     public int getCartoesVermelhos() {
-        return cartoesVermelhos;
+        return cartoes.getCartoesVermelhos();
     }
 
-    public int getSaldo(){
-        return this.getGolsPro() - this.getGolsContra();
-    }
     // SETTERS
     public void setNome(String nome) {
         this.nome = nome;
@@ -83,46 +75,47 @@ public class Time {
     }
 
     public void setVitorias(int vitorias) {
-        this.vitorias = vitorias;
+        this.desempenho.setVitorias(vitorias);
     }
 
     public void setEmpates(int empates) {
-        this.empates = empates;
+        this.desempenho.setEmpates(empates);
     }
 
     public void setDerrotas(int derrotas) {
-        this.derrotas = derrotas;
+        this.desempenho.setDerrotas(derrotas);
     }
 
     public void setGolsPro(int golsPro) {
-        this.golsPro = golsPro;
+        this.golsJogo.setGolsPro(golsPro);
     }
 
     public void setGolsContra(int golsContra) {
-        this.golsContra = golsContra;
+        this.golsJogo.setGolsContra(golsContra);
     }
 
     public void setCartoesAmarelos(int cartoesAmarelos) {
-        this.cartoesAmarelos = cartoesAmarelos;
+        this.cartoes.setCartoesAmarelos(cartoesAmarelos);
+    }
+    public void setCartoesVermelhos(int cartoesVermelhos) {
+        this.cartoes.setCartoesVermelhos(cartoesVermelhos);
     }
 
-    public void setCartoesVermelhos(int cartoesVermelhos) {
-        this.cartoesVermelhos = cartoesVermelhos;
-    }
+
     
     @Override
     public String toString() {
         return "Time: " + nome + "\n" +
                "Pontos: " + pontos + "\n" +
                "Partidas Jogadas: " + partidasJogadas + "\n" +
-               "Vitórias: " + vitorias + "\n" +
-               "Empates: " + empates + "\n" +
-               "Derrotas: " + derrotas + "\n" +
-               "Gols Pró: " + golsPro + "\n" +
-               "Gols Contra: " + golsContra + "\n" +
-               "Saldo de Gols: " + getSaldo() + "\n" +
-               "Cartões Amarelos: " + cartoesAmarelos + "\n" +
-               "Cartões Vermelhos: " + cartoesVermelhos + "\n";
+               "Vitórias: " + desempenho.getVitorias() + "\n" +
+               "Empates: " + desempenho.getEmpates() + "\n" +
+               "Derrotas: " + desempenho.getDerrotas() + "\n" +
+               "Gols Pró: " + golsJogo.getGolsPro() + "\n" +
+               "Gols Contra: " + golsJogo.getGolsContra() + "\n" +
+               "Saldo de Gols: " + golsJogo.getSaldo() + "\n" +
+               "Cartões Amarelos: " + cartoes.getCartoesAmarelos() + "\n" +
+               "Cartões Vermelhos: " + cartoes.getCartoesVermelhos() + "\n";
     }
 
 }
