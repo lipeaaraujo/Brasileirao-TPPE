@@ -11,6 +11,22 @@ public class Campeonato {
         this.rodadas = criarRodadas();
     }
 
+    private ArrayList<Partida> confrontosDiretos(ArrayList<Time> timesConfronto, int rodada) {
+        int n = timesConfronto.size();
+        ArrayList<Partida> confrontos = new ArrayList<>();
+        for (int i = 0; i < n / 2; i++) {
+            Time time1 = timesConfronto.get(i);
+            Time time2 = timesConfronto.get(n - 1 - i);
+
+            if (rodada < n - 1) {
+                confrontos.add(new Partida(time1, time2)); // ida
+            } else {
+                confrontos.add(new Partida(time2, time1)); // volta
+            }
+        }
+        return confrontos;
+    }
+
     private ArrayList<Rodada> criarRodadas() {
         ArrayList<Rodada> rodadas = new ArrayList<>();
         ArrayList<Time> listaTimes = new ArrayList<>(times);
@@ -20,18 +36,7 @@ public class Campeonato {
 
         for (int rodada = 0; rodada < totalRodadas; rodada++) {
             ArrayList<Partida> partidasRodada = new ArrayList<>();
-
-            for (int i = 0; i < n / 2; i++) {
-                Time time1 = listaTimes.get(i);
-                Time time2 = listaTimes.get(n - 1 - i);
-
-                if (rodada < n - 1) {
-                    partidasRodada.add(new Partida(time1, time2)); // ida
-                } else {
-                    partidasRodada.add(new Partida(time2, time1)); // volta
-                }
-            }
-
+            partidasRodada = confrontosDiretos(listaTimes, rodada);
             rodadas.add(new Rodada(partidasRodada));
 
             Time ultimo = listaTimes.remove(listaTimes.size() - 1);
